@@ -104,7 +104,7 @@ export default function Header({ currentLanguage, onLanguageChange, isDarkMode, 
             }}
           >
             <img src="/generated_images/logo.png" alt="Monsatery360 Logo" className="h-10 w-10 object-contain" />
-            <span className="text-xl font-bold">Monestry360</span>
+            <span className="text-xl font-bold">Monsatery360</span>
           </Link>
           {/* Search Bar (after logo, desktop only) */}
           <div className="relative w-64 hidden md:block">
