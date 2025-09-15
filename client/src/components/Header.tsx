@@ -42,11 +42,9 @@ const languages = [
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Monasteries', href: '/monasteries' },
-  { label: 'Manuscripts', href: '/#manuscripts' },
+  { label: 'Manuscripts', href: '/manuscripts' },
   { label: 'Trip Planner', href: '/#trip-planner' },
   { label: 'Travel Guide', href: '/travel-guide' },
-  { label: 'Culture', href: '/culture' },
-  { label: 'Blog', href: '/blog' },
 ];
 
 export default function Header({ currentLanguage, onLanguageChange, isDarkMode, onThemeToggle }: HeaderProps) {
@@ -97,8 +95,15 @@ export default function Header({ currentLanguage, onLanguageChange, isDarkMode, 
         {/* Left: Logo + Search */}
         <div className="flex items-center gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Mountain className="h-8 w-8 text-primary" />
+          <Link
+            href="/"
+            className="flex items-center space-x-2"
+            onClick={e => {
+              // Always scroll to top when clicking logo
+              setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 0);
+            }}
+          >
+            <img src="/generated_images/logo.png" alt="Monsatery360 Logo" className="h-10 w-10 object-contain" />
             <span className="text-xl font-bold">Monestry360</span>
           </Link>
           {/* Search Bar (after logo, desktop only) */}
@@ -216,31 +221,36 @@ export default function Header({ currentLanguage, onLanguageChange, isDarkMode, 
         {/* Desktop Navigation */}
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
-            {navItems.map((item) => (
-              <NavigationMenuItem key={item.href}>
-                {item.label === 'Trip Planner' ? (
-                  <a
-                    href="/#trip-planner"
-                    onClick={handleTripPlannerClick}
-                    className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50`}
-                    data-testid="nav-trip-planner"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link href={item.href}>
-                    <NavigationMenuLink 
-                      className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 ${
-                        location === item.href ? 'bg-accent text-accent-foreground' : ''
-                      }`}
-                      data-testid={`nav-${item.label.toLowerCase()}`}
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.href}>
+                  {item.label === 'Trip Planner' ? (
+                    <a
+                      href="/#trip-planner"
+                      onClick={handleTripPlannerClick}
+                      className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50`}
+                      data-testid="nav-trip-planner"
                     >
                       {item.label}
-                    </NavigationMenuLink>
-                  </Link>
-                )}
-              </NavigationMenuItem>
-            ))}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={e => {
+                        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 0);
+                      }}
+                    >
+                      <NavigationMenuLink 
+                        className={`group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 ${
+                          location === item.href ? 'bg-accent text-accent-foreground' : ''
+                        }`}
+                        data-testid={`nav-${item.label.toLowerCase()}`}
+                      >
+                        {item.label}
+                      </NavigationMenuLink>
+                    </Link>
+                  )}
+                </NavigationMenuItem>
+              ))}
           </NavigationMenuList>
         </NavigationMenu>
 

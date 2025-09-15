@@ -212,6 +212,11 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  cursor: url('./generated_images/cursor.png'), auto;
+  }
+
+  a, button, [role="button"], .cursor-pointer, .hover\:cursor-pointer:hover {
+  cursor: url('./generated_images/hover-cursor.png'), pointer;
   }
 }
 

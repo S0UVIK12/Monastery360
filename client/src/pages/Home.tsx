@@ -152,13 +152,14 @@ export default function Home() {
               Discover rare and sacred manuscripts preserved in Sikkim's monasteries.
             </p>
           </div>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto flex flex-col gap-6">
+            {/* Show at least two manuscripts */}
             <button
               className="bg-background rounded-lg shadow p-6 flex flex-col md:flex-row gap-6 items-center hover:bg-accent/30 transition cursor-pointer w-full text-left"
               onClick={() => navigate('/manuscripts/1')}
               aria-label="View Palm-leaf Buddhist Manuscript"
             >
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg/320px-Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg" alt="Sample Manuscript" className="w-40 h-28 object-cover rounded" />
+              <img src="/generated_images/1.jpeg" alt="Palm-leaf Buddhist Manuscript" className="w-40 h-28 object-cover rounded" />
               <div>
                 <h3 className="text-xl font-semibold mb-2">Palm-leaf Buddhist Manuscript</h3>
                 <p className="text-muted-foreground mb-2 text-sm">
@@ -167,6 +168,26 @@ export default function Home() {
                 <Badge variant="outline">Sanskrit • 11th Century</Badge>
               </div>
             </button>
+            <button
+              className="bg-background rounded-lg shadow p-6 flex flex-col md:flex-row gap-6 items-center hover:bg-accent/30 transition cursor-pointer w-full text-left"
+              onClick={() => navigate('/manuscripts/2')}
+              aria-label="View Tibetan Illuminated Manuscript"
+            >
+              <img src="/generated_images/2.jpeg" alt="Tibetan Illuminated Manuscript" className="w-40 h-28 object-cover rounded" />
+              <div>
+                <h3 className="text-xl font-semibold mb-2">Tibetan Illuminated Manuscript</h3>
+                <p className="text-muted-foreground mb-2 text-sm">
+                  A beautifully illustrated Tibetan manuscript featuring Buddhist iconography and teachings, dating to the 14th century.
+                </p>
+                <Badge variant="outline">Tibetan • 14th Century</Badge>
+              </div>
+            </button>
+            {/* Button to view more manuscripts */}
+            <div className="flex justify-center mt-4">
+              <Button variant="outline" size="lg" onClick={() => navigate('/manuscripts')}>
+                View More Manuscripts
+              </Button>
+            </div>
           </div>
         </div>
       </section>

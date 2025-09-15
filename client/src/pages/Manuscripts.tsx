@@ -5,13 +5,13 @@ const manuscripts = [
   {
     id: '1',
     title: 'Palm-leaf Buddhist Manuscript',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg/320px-Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg',
+  image: '/generated_images/1.jpeg',
     summary: 'An 11th-century palm-leaf manuscript in Sanskrit, preserved in a Himalayan monastery. Contains sacred Buddhist texts and prayers.'
   },
   {
     id: '2',
     title: 'Tibetan Illuminated Manuscript',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Tibetan_Illuminated_Manuscript.jpg/320px-Tibetan_Illuminated_Manuscript.jpg',
+  image: '/generated_images/2.jpeg',
     summary: 'A beautifully illustrated Tibetan manuscript featuring Buddhist iconography and teachings, dating to the 14th century.'
   }
 ];

@@ -7,13 +7,24 @@ export default function ManuscriptDetail() {
   const [, navigate] = useLocation();
 
   // Only show manuscript if id is '1', else show empty state
-  const manuscript = params.id === '1' ? {
-    id: '1',
-    title: 'Palm-leaf Buddhist Manuscript',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg/320px-Buddhist_Manuscript%2C_Nepal%2C_11th_century_AD%2C_Palm-leaf%2C_Sanskrit_in_Nepalese_script%2C_British_Museum.jpg',
-    description: 'An 11th-century palm-leaf manuscript in Sanskrit, preserved in a Himalayan monastery. Such manuscripts contain sacred Buddhist texts, prayers, and teachings. The intricate script and preservation techniques reflect the region’s deep spiritual and scholarly traditions.',
-    details: 'This manuscript is written in Nepalese script and is a rare example of early Buddhist literature. The palm leaves are carefully inscribed and bound together, often wrapped in cloth for protection. These documents are invaluable for understanding the transmission of Buddhist philosophy and ritual across the Himalayas.'
-  } : null;
+  let manuscript = null;
+  if (params.id === '1') {
+    manuscript = {
+      id: '1',
+      title: 'Palm-leaf Buddhist Manuscript',
+      image: '/generated_images/1.jpeg',
+      description: 'An 11th-century palm-leaf manuscript in Sanskrit, preserved in a Himalayan monastery. Such manuscripts contain sacred Buddhist texts, prayers, and teachings. The intricate script and preservation techniques reflect the region’s deep spiritual and scholarly traditions.',
+      details: 'This manuscript is written in Nepalese script and is a rare example of early Buddhist literature. The palm leaves are carefully inscribed and bound together, often wrapped in cloth for protection. These documents are invaluable for understanding the transmission of Buddhist philosophy and ritual across the Himalayas.'
+    };
+  } else if (params.id === '2') {
+    manuscript = {
+      id: '2',
+      title: 'Tibetan Illuminated Manuscript',
+      image: '/generated_images/2.jpeg',
+      description: 'A beautifully illustrated Tibetan manuscript featuring Buddhist iconography and teachings, dating to the 14th century.',
+      details: 'This manuscript showcases intricate Buddhist art and calligraphy, reflecting the spiritual and artistic traditions of Tibetan culture. Illuminated manuscripts like this are treasured for their historical and religious significance.'
+    };
+  }
 
   if (!manuscript) {
     return (

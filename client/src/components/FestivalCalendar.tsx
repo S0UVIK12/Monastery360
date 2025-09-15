@@ -24,7 +24,7 @@ const festivalTypes = {
 };
 
 export default function FestivalCalendar({ festivals, onFestivalSelect, selectedMonth }: FestivalCalendarProps) {
-  const [currentView, setCurrentView] = useState<'grid' | 'timeline'>('grid');
+  const [currentView] = useState<'grid' | 'timeline'>('timeline');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Group festivals by month
@@ -50,20 +50,11 @@ export default function FestivalCalendar({ festivals, onFestivalSelect, selected
             Discover Sikkim's vibrant festivals and cultural celebrations
           </p>
         </div>
-        
         <div className="flex gap-2">
           <Button
-            variant={currentView === 'grid' ? 'default' : 'outline'}
+            variant="default"
             size="sm"
-            onClick={() => setCurrentView('grid')}
-            data-testid="view-grid"
-          >
-            Grid View
-          </Button>
-          <Button
-            variant={currentView === 'timeline' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('timeline')}
+            disabled
             data-testid="view-timeline"
           >
             Timeline
@@ -106,136 +97,68 @@ export default function FestivalCalendar({ festivals, onFestivalSelect, selected
         </CardContent>
       </Card>
 
-      {/* Calendar Grid View */}
-      {currentView === 'grid' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {months.map((month) => (
-            <Card 
-              key={month} 
-              className={`hover-elevate ${selectedMonth === month ? 'ring-2 ring-primary' : ''}`}
-            >
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center justify-between">
-                  {month}
-                  <Badge variant="secondary">
-                    {festivalsByMonth[month]?.length || 0}
-                  </Badge>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {festivalsByMonth[month]?.length > 0 ? (
-                  festivalsByMonth[month].slice(0, 3).map((festival) => (
-                    <div
-                      key={festival.id}
-                      onClick={() => onFestivalSelect(festival)}
-                      className="p-3 border rounded-md hover:bg-accent cursor-pointer transition-colors"
-                      data-testid={`festival-${festival.id}`}
-                    >
-                      <div className="flex items-start justify-between mb-1">
-                        <h5 className="font-medium text-sm line-clamp-1">
-                          {festival.name}
-                        </h5>
-                        <Star className="w-3 h-3 text-chart-3 flex-shrink-0 ml-1" />
-                      </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2">
-                        {festival.description}
-                      </p>
-                      {festival.monastery && (
-                        <div className="flex items-center mt-1">
-                          <MapPin className="w-3 h-3 mr-1 text-muted-foreground" />
-                          <span className="text-xs text-muted-foreground truncate">
-                            {festival.monastery}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-4 text-muted-foreground">
-                    <Calendar className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">No festivals this month</p>
-                  </div>
-                )}
-                
-                {festivalsByMonth[month]?.length > 3 && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-full text-xs"
-                    onClick={() => console.log(`View all festivals for ${month}`)}
-                  >
-                    View {festivalsByMonth[month].length - 3} more
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
-
       {/* Timeline View */}
-      {currentView === 'timeline' && (
-        <Card>
-          <CardContent className="p-6">
-            <div className="space-y-6">
-              {festivals.slice(0, 8).map((festival, index) => (
-                <div key={festival.id} className="flex items-start space-x-4">
-                  {/* Timeline dot */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
-                    {index < festivals.length - 1 && (
-                      <div className="w-0.5 h-12 bg-border mt-2"></div>
-                    )}
-                  </div>
-                  
-                  {/* Festival content */}
-                  <div
-                    onClick={() => onFestivalSelect(festival)}
-                    className="flex-1 pb-6 cursor-pointer group"
-                    data-testid={`timeline-festival-${festival.id}`}
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h4 className="font-medium group-hover:text-primary transition-colors">
-                          {festival.name}
-                        </h4>
-                        <div className="flex items-center text-sm text-muted-foreground mt-1">
+      <Card>
+        <CardContent className="p-6">
+          <div className="space-y-6">
+            {festivals.slice(0, 8).map((festival, index) => (
+              <div key={festival.id} className="flex items-start space-x-4 p-4 rounded-xl border border-border bg-background mb-4 group hover:cursor-pointer">
+                {/* Timeline dot */}
+                <div className="flex flex-col items-center pt-2">
+                  <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
+                  {index < festivals.length - 1 && (
+                    <div className="w-0.5 h-12 bg-border mt-2"></div>
+                  )}
+                </div>
+                {/* Festival content */}
+                <div
+                  onClick={() => onFestivalSelect(festival)}
+                  className="flex-1 group"
+                  data-testid={`timeline-festival-${festival.id}`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-medium group-hover:text-primary transition-colors">
+                        {festival.name}
+                      </h4>
+                      <div className="flex items-center text-sm text-muted-foreground mt-1 gap-4 flex-wrap">
+                        <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3 mr-1" />
                           {festival.date}
-                          {festival.monastery && (
-                            <>
-                              <span className="mx-2">•</span>
-                              <MapPin className="w-3 h-3 mr-1" />
-                              {festival.monastery}
-                            </>
-                          )}
-                        </div>
+                        </span>
+                        {festival.monastery && (
+                          <span className="flex items-center gap-1">
+                            <span className="mx-2">•</span>
+                            <MapPin className="w-3 h-3 mr-1" />
+                            {festival.monastery}
+                          </span>
+                        )}
                       </div>
-                      <Badge variant="outline" className="text-xs">
-                        {festival.significance}
-                      </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                      {festival.description}
-                    </p>
+                    <Badge variant="outline" className="text-xs ml-2 whitespace-nowrap">
+                      {festival.significance}
+                    </Badge>
                   </div>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                    {festival.description}
+                  </p>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Legend */}
       <Card>
         <CardContent className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <span className="text-sm font-medium">Festival Types:</span>
               {Object.entries(festivalTypes).map(([type, config]) => (
-                <div key={type} className="flex items-center space-x-1">
+                <div key={type} className="flex items-center gap-1">
                   <div className={`w-3 h-3 rounded-full ${config.color.split(' ')[0]}`}></div>
-                  <span className="text-xs">{config.label}</span>
+                  <span className="text-xs whitespace-nowrap">{config.label}</span>
                 </div>
               ))}
             </div>
