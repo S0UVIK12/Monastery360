@@ -49,7 +49,7 @@ export default function FestivalCalendar({ festivals, onFestivalSelect, selected
           <p className="text-muted-foreground">
             Discover Sikkim's vibrant festivals and cultural celebrations
           </p>
-        </div>
+        </div> 
         <div className="flex gap-2">
           <Button
             variant="default"

@@ -6,7 +6,7 @@ export interface TripPlannerRequest {
 }
 
 export async function postTripPlanner(req: TripPlannerRequest) {
-  const res = await fetch('/api/trip-planner', {
+  const res = await fetch((await import('./config')).apiUrl('/api/trip-planner'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req),
